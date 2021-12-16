@@ -1,12 +1,11 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:hotbot_app1/pages/alcohol.dart';
 import 'package:hotbot_app1/pages/belt.dart';
 import 'package:hotbot_app1/pages/bribe.dart';
 import 'package:hotbot_app1/pages/check_list.dart';
 import 'package:hotbot_app1/pages/dirty.dart';
-// import 'package:google_fonts/google_fonts.dart';
 import 'package:hotbot_app1/pages/duty_officer.dart';
 import 'package:hotbot_app1/pages/inspection.dart';
 import 'package:hotbot_app1/pages/insurance.dart';
@@ -39,9 +38,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // controller.addListener(() {
-    //   print('$controller.offset');
-    // });
   }
 
   Widget build(BuildContext context) {
@@ -65,18 +61,19 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.only(top: 15.0),
             padding: const EdgeInsets.all(0.0),
             decoration: BoxDecoration(
-              boxShadow: [BoxShadow(
-                color: Colors.black,
-                blurRadius: 10.0,
-                offset: Offset(1.0, 1.0),
-              ),
-              ],
-              borderRadius: BorderRadius.circular(10.0),
-              gradient: LinearGradient(colors: [
-                Color(0xFF5337ff),
-                Color(0xFF8131ff),
-                Color(0xFFbd27ff),
-              ])
+              color: Color(0xffE6E6E6),
+              // boxShadow: [BoxShadow(
+              //   color: Colors.black,
+              //   blurRadius: 10.0,
+              //   offset: Offset(1.0, 1.0),
+              // ),
+              // ],
+              borderRadius: BorderRadius.circular(7.0),
+              // gradient: LinearGradient(colors: [
+              //   Color(0xFF5337ff),
+              //   Color(0xFF8131ff),
+              //   Color(0xFFbd27ff),
+              // ])
             ),
             child: TextButton(
               onPressed: printFirst,
@@ -86,8 +83,7 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 16.0,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Roboto',
-                  color: Colors.white,
-                  
+                  color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -97,6 +93,43 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Column buildOutButton(String label) {
+
+      _launchURL() async {
+        String url = '';
+        url = 'tel:+78002227447';
+        
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Не могу открыть ссылку $url';
+        }
+      }
+      
+      return Column(
+               
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: ElevatedButton(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 28.0,
+                    // fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  ),
+                ),
+                onPressed: _launchURL,
+              ),
+          ),
+        ],
+      );
+    }
+ 
     Widget titleSection = Container(
       padding: const EdgeInsets.all(32.0),
       child: Row(
@@ -105,6 +138,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/images/logo_style.png',
+                  height: 150.0,
+                  fit: BoxFit.contain,
+                ),
                 Container(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Text(
@@ -133,8 +171,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection1 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Обязанности инспектора'),
           buildButtonColumn('Ваши права'),
@@ -144,8 +183,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection2 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Нарушения инспектора'),
           buildButtonColumn('Протокол'),
@@ -155,8 +195,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection3 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Обгон'),
           buildButtonColumn('Скорость'),
@@ -167,8 +208,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection4 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Алкоголь'),
           buildButtonColumn('Тонировка'),
@@ -179,8 +221,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection5 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Техосмотр'),
           buildButtonColumn('ОСАГО'),
@@ -191,8 +234,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection6 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Осмотр'),
           buildButtonColumn('Досмотр'),
@@ -203,8 +247,9 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget buttonSection7 = Container(
+      padding: EdgeInsets.only(top: 0, bottom: 0, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildButtonColumn('Забыли документы'),
           buildButtonColumn('Грязный знак'),
@@ -213,31 +258,45 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    return Scaffold(
-      backgroundColor: Colors.yellowAccent,
-      appBar: AppBar(
-        title: Text(
-          'Володя, помоги! Остановили ДПС',
-          style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              color: Colors.red,
-                
+    Widget sosSection = Container(
+      padding: EdgeInsets.only(top: 32, bottom: 0, left: 0, right: 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        
+        children: <Widget>[
+          Image.asset(
+              'assets/images/call-phone.png',
+              height: 55.0,
+              fit: BoxFit.contain,
           ),
-        )
+          
+          buildOutButton('SOS'),
+        ],
+      ),
+    );
+
+    return Scaffold(
+      // backgroundColor: Colors.yellowAccent,
+      appBar: AppBar(
+        title: Align(
+          child: Text(
+            'Володя, остановили ДПС!',
+            style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: Colors.black,
+            ),
+        ),
+        alignment: Alignment.center,
+      ),
       ),
       body: ListView(
         controller: controller,
         children: [
-          titleSection,
-          
+          // titleSection,
           scene == ''
-          ? Image.asset(
-            'assets/images/logo.png',
-            height: 150.0,
-            fit: BoxFit.contain,
-          )
+          ? titleSection
           : scene == 'Обязанности инспектора'
           ? DutyOfficer()
           : scene == 'Ваши права'
@@ -278,11 +337,12 @@ class _HomePageState extends State<HomePage> {
                     
           buttonSection1,
           buttonSection2,
+          buttonSection7,
           buttonSection3,
           buttonSection4,
           buttonSection5,
           buttonSection6,
-          buttonSection7,
+          sosSection,
 
           Divider(
             color: Colors.black,

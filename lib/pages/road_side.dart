@@ -89,7 +89,7 @@ class RoadSide extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: const EdgeInsets.all(5.0),
-            color: Colors.white,
+            color: Color(0xffE6E6E6),
             child: Text.rich(
               TextSpan(
                 children: <TextSpan>[

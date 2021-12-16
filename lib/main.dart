@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
       // убираем баннер
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.red,
+        primaryColor: Color(0xffff0000),
         textTheme: GoogleFonts.openSansCondensedTextTheme(
           Theme.of(context).textTheme,
         ),
